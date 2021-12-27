@@ -25,11 +25,18 @@ func (app *application) getOneMovie(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := app.writeJSON(w, http.StatusOK, movie, "movie"); err != nil {
-		app.logger.Println(errors.New("could not convert to JSON"))
+		app.errorJSON(w, err)
 	}
 
 }
 
 func (app *application) getAllMovies(w http.ResponseWriter, r *http.Request) {
+	movies, err := app.models.DB.All()
+	if err != nil {
+		app.errorJSON(w, err)
+	}
 
+	if err := app.writeJSON(w, http.StatusOK, movies, "movies"); err != nil {
+		app.errorJSON(w, err)
+	}
 }
