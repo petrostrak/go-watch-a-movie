@@ -22,7 +22,7 @@ export default class Genres extends Component {
             })
             .then((json) => {
                 this.setState({
-                    movies: json.genres,
+                    genres: json.genres,
                     isLoaded:true,
                 },
                 (error) =>{
@@ -36,17 +36,24 @@ export default class Genres extends Component {
 
     render() {
         const {genres, isLoaded, error} = this.state
-        return (
-            <Fragment>
-                <t2>Genres</t2>
-                <ul>
-                    {genres.map((m) => (
-                        <li key={m.id}>
-                            <Link to={`/genres/${m.id}`}>{m.genre_name}</Link>
-                        </li>
-                    ))}
-                </ul>
-            </Fragment>
-        );
+
+        if (error){
+            return <div>Error:{error.message}</div>
+        }else if (!isLoaded) {
+            return <p>Loading...</p>
+        } else {
+            return (
+                <Fragment>
+                    <t2>Genres</t2>
+                    <ul>
+                        {genres.map((m) => (
+                            <li key={m.id}>
+                                <Link to={`/genres/${m.id}`}>{m.genre_name}</Link>
+                            </li>
+                        ))}
+                    </ul>
+                </Fragment>
+            );
+        }
     }
 }
