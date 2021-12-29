@@ -48,7 +48,10 @@ export default class Genres extends Component {
                     <ul>
                         {genres.map((m) => (
                             <li key={m.id}>
-                                <Link to={`/genres/${m.id}`}>{m.genre_name}</Link>
+                                <Link to={{
+                                    pathname:`/genres/${m.id}`,
+                                    genreName: m.genre_name,
+                                }}>{m.genre_name}</Link>
                             </li>
                         ))}
                     </ul>
