@@ -134,7 +134,7 @@ export default class EditMovie extends Component {
                             name='description'
                             rows={'3'}
                             onChange={this.handleChange}
-                            value={movie.value}/>
+                            value={movie.description}/>
                     </div>
                     <hr />
                     <button className='btn btn-primary'>Save</button>
