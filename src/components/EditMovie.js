@@ -111,6 +111,7 @@ export default class EditMovie extends Component {
                         type={'description'}
                         name={'description'}
                         value={movie.description}
+                        rows={3}
                         handleChange={this.handleChange}
                     />
                     <hr />

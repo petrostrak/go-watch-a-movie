@@ -11,7 +11,8 @@ const TextInput = (props) => {
                 name={props.name}
                 rows={'3'}
                 onChange={props.handleChange}
-                value={props.value}/>
+                value={props.value}
+                rows={props.rows}/>
         </div>
     );
 };
