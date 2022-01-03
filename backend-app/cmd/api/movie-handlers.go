@@ -71,12 +71,18 @@ func (app *application) deleteMovie(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (app *application) insertMovie(w http.ResponseWriter, r *http.Request) {
+func (app *application) editmovie(w http.ResponseWriter, r *http.Request) {
+	type jsonResp struct {
+		OK bool `json:"ok"`
+	}
 
-}
+	ok := jsonResp{
+		OK: true,
+	}
 
-func (app *application) updateMovie(w http.ResponseWriter, r *http.Request) {
-
+	if err := app.writeJSON(w, http.StatusOK, ok, "respose"); err != nil {
+		app.errorJSON(w, err)
+	}
 }
 
 func (app *application) searchMovies(w http.ResponseWriter, r *http.Request) {
