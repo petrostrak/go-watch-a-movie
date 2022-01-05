@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"net/http"
 	"strconv"
@@ -71,7 +72,25 @@ func (app *application) deleteMovie(w http.ResponseWriter, r *http.Request) {
 
 }
 
+type MoviePayload struct {
+	ID          string `json:"id"`
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Year        string `json:"year"`
+	ReleaseDate string `json:"release_date"`
+	Runtime     string `json:"runtime"`
+	Rating      string `json:"rating"`
+	MPAARating  string `json:"mpaa_rating"`
+}
+
 func (app *application) editmovie(w http.ResponseWriter, r *http.Request) {
+	var payload MoviePayload
+
+	if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
+		app.errorJSON(w, err)
+		return
+	}
+
 	type jsonResp struct {
 		OK bool `json:"ok"`
 	}
