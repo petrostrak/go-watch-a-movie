@@ -11,6 +11,11 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+type jsonResp struct {
+	OK      bool   `json:"ok"`
+	Message string `json:"message"`
+}
+
 func (app *application) getOneMovie(w http.ResponseWriter, r *http.Request) {
 	params := httprouter.ParamsFromContext(r.Context())
 	id, err := strconv.Atoi(params.ByName("id"))
@@ -106,8 +111,9 @@ func (app *application) editmovie(w http.ResponseWriter, r *http.Request) {
 	movie.CreatedAt = time.Now()
 	movie.UpdatedAt = time.Now()
 
-	type jsonResp struct {
-		OK bool `json:"ok"`
+	if err := app.models.DB.InsertMovie(movie); err != nil {
+		app.errorJSON(w, err)
+		return
 	}
 
 	ok := jsonResp{
