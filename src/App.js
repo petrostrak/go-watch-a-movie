@@ -1,6 +1,5 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import { useParams, useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
 import Admin from './components/Admin';
 import EditMovie from "./components/EditMovie";
 import Genres from "./components/Genres";
