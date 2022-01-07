@@ -23,8 +23,8 @@ export default class Login extends Component {
     }
 
     handleChange = (e) => {
-        let value = this.target.value;
-        let name = this.target.name;
+        let value = e.target.value;
+        let name = e.target.name;
         this.setState((prevState) =>({
             ...prevState,
             [name]: value,
@@ -49,6 +49,29 @@ export default class Login extends Component {
         if (errors.length > 0) {
             return false
         }
+
+        const data = new FormData(e.target);
+        const payload = Object.fromEntries(data.entries());
+
+        const requestOptions = {
+            method: "POST",
+            body: JSON.stringify(payload),
+        }
+
+        fetch('http://localhost:4000/v1/signin', requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.error) {
+                    this.setState({
+                        alert: {
+                            type: "alert-danger",
+                            message: data.error.message,
+                        }
+                    })
+                } else {
+                    console.log(data);
+                }
+            })
     }
 
     hasError(key) {
