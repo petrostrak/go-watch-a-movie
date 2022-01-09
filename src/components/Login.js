@@ -71,6 +71,10 @@ export default class Login extends Component {
                 } else {
                     console.log(data);
                     this.handleJWTChange(Object.values(data)[0]);
+
+                    // save token
+                    window.localStorage.setItem("jwt", JSON.stringify(Object.values(data)[0]));
+
                     this.props.history.push({
                         pathname: "/admin",
                     })
