@@ -88,7 +88,6 @@ export default class EditMovie extends Component {
         .then((response) => response.json())
         .then(data => {
             if (data.error) {
-              alert(data.error.message)
               this.setState({
                 alert: {type: "alert-danger",
                 message: data.error.message},
@@ -117,6 +116,14 @@ export default class EditMovie extends Component {
   }
 
 	  componentDidMount() {
+
+      if (this.props.jwt === "")  {
+        this.props.history.push({
+          pathname: "/login",
+        })
+        return;
+      }
+
 	    const id = this.props.match.params.id;
 	    if (id > 0) {
 	      fetch("http://localhost:4000/v1/movie/" + id)
