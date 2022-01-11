@@ -8,6 +8,7 @@ import Movies from './components/Movies';
 import OneMovie from "./components/OneMovie";
 import OneGenre from "./components/OneGenre";
 import Login from "./components/Login";
+import GraphQL from "./components/GraphQL";
 
 export default class App extends Component {
 
@@ -84,11 +85,10 @@ export default class App extends Component {
                     </li>
                   </Fragment>
                   )}
-
+                  <li className="list-group-item">
+                    <Link to="/graphql">GraphQL</Link>
+                  </li>
                 </ul>
-                <pre>
-                  {JSON.stringify(this.state, null, 3)}
-                </pre>
               </nav>
             </div>
 
@@ -102,6 +102,10 @@ export default class App extends Component {
                 <Route path={"/genres/:id"} component={OneGenre} />
                 <Route exact path={"/genres"}>
                   <Genres />
+                </Route>
+
+                <Route exact path={"/graphql"}>
+                  <GraphQL />
                 </Route>
 
                 <Route exact path={"/login"} 
